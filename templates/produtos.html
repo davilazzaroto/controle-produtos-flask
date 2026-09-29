@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block title %}Produtos cadastrados{% endblock %} {%
+block content %}
+<section class="panel">
+  <div class="section-heading">
+    <h1>Produtos cadastrados</h1>
+    <a class="button" href="{{ url_for('cad_produto') }}">Cadastrar produto</a>
+  </div>
+  {% if produtos %}
+  <div
+    class="table-wrap"
+    role="region"
+    aria-label="Produtos cadastrados"
+    tabindex="0"
+  >
+    <table>
+      <thead>
+        <tr>
+          <th scope="col">Nome</th>
+          <th scope="col">Preço</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Status</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for produto in produtos %}
+        <tr>
+          <td class="product-name">{{ produto.nome }}</td>
+          <td class="price">
+            R$ {{ '%.2f'|format(produto.preco)|replace('.', ',') }}
+          </td>
+          <td>{{ produto.quantidade }}</td>
+          <td>
+            <span class="badge {{ 'active' if produto.ativo else '' }}"
+              >{{ 'Ativo' if produto.ativo else 'Inativo' }}</span
+            >
+          </td>
+          <td>
+            <div class="row-actions">
+              <a
+                class="button secondary"
+                href="{{ url_for('edi_produto', produto_id=produto.id) }}"
+                aria-label="Editar {{ produto.nome }}"
+                >Editar</a
+              >
+              {# Excluir envia um POST, pois a ação modifica o banco. #}
+              <form
+                method="post"
+                action="{{ url_for('excluir_produto', produto_id=produto.id) }}"
+              >
+                <button
+                  class="danger"
+                  type="submit"
+                  aria-label="Excluir {{ produto.nome }}"
+                >
+                  Excluir
+                </button>
+              </form>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="empty-state">
+    Nenhum produto cadastrado. Use o botão acima para cadastrar o primeiro.
+  </p>
+  {% endif %}
+</section>
+{% endblock %}

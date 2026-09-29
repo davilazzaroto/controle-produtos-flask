@@ -1,0 +1,13 @@
+{% extends 'base.html' %} {% block content %}
+<section class="panel">
+  <p class="eyebrow">CONTROLE DE PRODUTOS</p>
+  <h1>Seus produtos, organizados.</h1>
+  <p>Cadastre novos itens ou consulte e atualize os produtos cadastrados.</p>
+  <div class="actions">
+    <a class="button" href="{{ url_for('cad_produto') }}">Cadastrar produto</a>
+    <a class="button secondary" href="{{ url_for('listar_produtos') }}"
+      >Listar produtos</a
+    >
+  </div>
+</section>
+{% endblock %}

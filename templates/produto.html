@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}{{ 'Editar' if produto else 'Cadastrar' }} produto{% endblock %}
+{% block content %}
+<section class="panel form-panel">
+  <h1>{{ 'Editar' if produto else 'Cadastrar' }} produto</h1>
+  <p>Informe os dados do produto abaixo.</p>
+  <form method="post" class="produto">
+    <div class="form-grid">
+      <div class="form-field field-name">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" name="nomeForm" maxlength="100" required value="{{ request.form.get('nomeForm', produto.nome if produto else '') }}" />
+      </div>
+      <div class="form-field">
+        <label for="preco">Preço (R$)</label>
+        <input id="preco" type="number" name="precoForm" min="0" step="0.01" required value="{{ request.form.get('precoForm', produto.preco if produto else '') }}" />
+      </div>
+      <div class="form-field">
+        <label for="quantidade">Quantidade</label>
+        <input id="quantidade" type="number" name="quantidadeForm" min="0" step="1" required value="{{ request.form.get('quantidadeForm', produto.quantidade if produto else '') }}" />
+      </div>
+    </div>
+    <label class="status-field" for="ativo">
+      <input id="ativo" type="checkbox" name="ativoForm" {% if (request.method == 'POST' and 'ativoForm' in request.form) or (request.method != 'POST' and produto and produto.ativo) %}checked{% endif %} />
+      Produto ativo
+    </label>
+    <div class="actions">
+      <button type="submit">{{ 'Salvar alterações' if produto else 'Cadastrar' }}</button>
+      <a class="button secondary" href="{{ url_for('listar_produtos') }}">Voltar para a listagem</a>
+    </div>
+  </form>
+</section>
+{% endblock %}

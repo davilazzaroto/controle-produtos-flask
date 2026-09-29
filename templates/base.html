@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
+    <title>{% block title %}Controle de produtos{% endblock %}</title>
+  </head>
+  <body>
+    <div class="page-shell">
+      <header>
+        <a class="brand" href="{{ url_for('home') }}"
+          >Controle de produtos<span aria-hidden="true">.</span></a
+        >
+        <nav aria-label="Navegação principal">
+          <a href="{{ url_for('home') }}">Home</a>
+          <a href="{{ url_for('cad_produto') }}">Cadastrar</a>
+          <a href="{{ url_for('listar_produtos') }}">Listar produtos</a>
+        </nav>
+      </header>
+      <main>
+        {# As categorias das mensagens definem o estilo de sucesso ou erro no
+        CSS. #} {% for categoria, mensagem in
+        get_flashed_messages(with_categories=true) %}
+        <div class="message {{ categoria }}" role="status">{{ mensagem }}</div>
+        {% endfor %} {# Cada página preenche este bloco e reutiliza a navegação
+        acima. #} {% block content %}{% endblock %}
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/static/css/style.css" />
+    <title>Editar o seu Produto</title>
+  </head>
+  <body>
+    <div class="page-shell product-panel">
+    <h1>Edite os seus itens para a venda!</h1>
+    <form action="" class="produto" , method="post">
+      <div class="form-grid">
+        <div class="form-field field-name">
+          Nome: <input type="text" , name="nomeForm" />
+        </div>
+        <div class="form-field">
+          Preco: <input type="number" , name="precoForm" />
+        </div>
+        <div class="form-field">
+          Quantidade <input type="number" , name="quantidadeForm" />
+        </div>
+      </div>
+      <div class="status-field">
+        Ativo <input type="checkbox" name="ativoForm"
+        />
+      </div>
+    <button class="cadastrar-produto", type="submit" value="cad_produto">Cadastrar</button>
+    </form>
+    <div class="back-action">
+      <button>
+        <a href="{{ url_for('home') }}" class="btn">
+          Voltar para a página inicial
+        </a>
+        </button>
+    </div>
+    </div>
+  </body>
+</html>
